@@ -1,9 +1,12 @@
 import os
 from coinbase.wallet.client import Client
 from coinbase.wallet.model import Money
-
+"""
+Collects balance from coinbase emits report.
+"""
 
 def filter_accounts(data):
+    """Returns a list of only accounts that have a balance."""
     return { acct.currency : acct for acct in data if float(acct.balance.amount) > 0.0 }
 
 if __name__=='__main__':
@@ -15,9 +18,8 @@ if __name__=='__main__':
     portfolio = filter_accounts(accounts.data)
     order = list(portfolio.keys())
     order.sort()
-    f = "{:<18}    {:<18}" 
+    f = "{:<18}    {:<18}"
     lines = [ print(f.format(str(portfolio[i].balance),str(portfolio[i].native_balance)))
               for i in order ]
     total_native = sum([ float(portfolio[i].native_balance.amount) for i in order])
     print("total usd: {:.2f}".format(total_native))
-    
