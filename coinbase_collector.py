@@ -1,8 +1,6 @@
+"""Collects balance from coinbase emits report."""
 import os
 from coinbase.wallet.client import Client
-"""
-Collects balance from coinbase emits report.
-"""
 
 def filter_accounts(data):
     """Returns a list of only accounts that have a balance."""
