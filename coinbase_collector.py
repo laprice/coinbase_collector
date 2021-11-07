@@ -13,3 +13,9 @@ if __name__=='__main__':
     user = client.get_current_user()
     accounts = client.get_accounts()
     portfolio = filter_accounts(accounts.data)
+    order = list(portfolio.keys())
+    order.sort()
+    lines = [ print(portfolio[i].balance,portfolio[i].native_balance) for i in order ]
+    total_native = sum([ float(portfolio[i].native_balance.amount) for i in order])
+    print("total usd: {:.2f}".format(total_native))
+    
