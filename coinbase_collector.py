@@ -1,6 +1,5 @@
 import os
 from coinbase.wallet.client import Client
-from coinbase.wallet.model import Money
 """
 Collects balance from coinbase emits report.
 """
@@ -18,8 +17,8 @@ if __name__=='__main__':
     portfolio = filter_accounts(accounts.data)
     order = list(portfolio.keys())
     order.sort()
-    f = "{:<18}    {:<18}"
-    lines = [ print(f.format(str(portfolio[i].balance),str(portfolio[i].native_balance)))
+    lines = [ F"{str(portfolio[i].balance):<18}    {str(portfolio[i].native_balance):<18}"
               for i in order ]
+    _ = [print(line) for line in lines]
     total_native = sum([ float(portfolio[i].native_balance.amount) for i in order])
-    print("total usd: {:.2f}".format(total_native))
+    print(F"total usd: {total_native:.2f}")
