@@ -10,3 +10,9 @@ You'll need to inject the api key and secret into the environment that you run t
 export API_KEY="your_api_key"
 export API_SECRET="your_coinbase_api_secret"
 ```
+
+This code uses a deprecated coinbase api wrapper and has not been audited for security risks.
+
+**If you use this code and lose money it's your fault.**
+
+*This code comes with no guarantee of fitness to purpose, quality or correctness.*
