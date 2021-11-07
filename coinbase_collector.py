@@ -16,7 +16,8 @@ if __name__=='__main__':
     order = list(portfolio.keys())
     order.sort()
     f = "{:<18}    {:<18}" 
-    lines = [ print(f.format(portfolio[i].balance,portfolio[i].native_balance)) for i in order ]
+    lines = [ print(f.format(str(portfolio[i].balance),str(portfolio[i].native_balance)))
+              for i in order ]
     total_native = sum([ float(portfolio[i].native_balance.amount) for i in order])
     print("total usd: {:.2f}".format(total_native))
     
