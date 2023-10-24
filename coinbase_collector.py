@@ -6,6 +6,9 @@ def filter_accounts(data):
     """Returns a list of only accounts that have a balance."""
     return { acct.currency : acct for acct in data if float(acct.balance.amount) > 0.0 }
 
+def usd_price(acct):
+    return float((1.0/float(acct.balance.amount)) * float(acct.native_balance.amount))
+
 if __name__=='__main__':
     api_key = os.environ['API_KEY']
     api_secret = os.environ['API_SECRET']
@@ -15,7 +18,7 @@ if __name__=='__main__':
     portfolio = filter_accounts(accounts.data)
     order = list(portfolio.keys())
     order.sort()
-    lines = [ F"{str(portfolio[i].balance):<18}    {str(portfolio[i].native_balance):<18}"
+    lines = [ F"{str(portfolio[i].balance):<18}    {str(portfolio[i].native_balance):<18}    {usd_price(portfolio[i]):<18,.2f}"
               for i in order ]
     _ = [print(line) for line in lines]
     total_native = sum([ float(portfolio[i].native_balance.amount) for i in order])
